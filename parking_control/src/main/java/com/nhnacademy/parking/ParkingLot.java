@@ -3,20 +3,28 @@ package com.nhnacademy.parking;
 import java.util.HashMap;
 
 public class ParkingLot {
-    HashMap<String, ParkingZone> lot = new HashMap<>();
+    private HashMap<String, ParkingZone> lot = new HashMap<>();
 
-    public ParkingZone getZoneByName(String name) {
+    public int getTotalCar() {
+        return this.lot.size();
+    }
+
+    public void inputCar(ParkingZone zone) {
+        lot.put(zone.getName(), zone);
+    }
+
+    public Car outCar(String zoneName) {
+        Car car = findCarByZoneName(zoneName);
+        lot.remove(zoneName);
+        return car;
+    }
+
+    public Car findCarByZoneName(String zoneName) {
+        for (String name : lot.keySet()) {
+            if (name.equals(zoneName))
+                return lot.get(name).getCar();
+        }
         return null;
     }
 
-    public Car outCar(Car car) {
-        return null;
-    }
-
-    public ParkingZone getZoneByCar(Car car) {
-        return null;
-    }
-
-    public void inputCar(String name, Car car) {
-    }
 }

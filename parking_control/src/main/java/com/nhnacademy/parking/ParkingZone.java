@@ -3,12 +3,14 @@ package com.nhnacademy.parking;
 public class ParkingZone {
     private String name;
     private Car car;
-    private boolean isParked;
+    private ParkTime enterTime;
+    private ParkTime leaveTime;
 
-    public ParkingZone(String name, Car car) {
-        this.name = name;
+    public ParkingZone(String zoneName, Car car, ParkTime enterTime) {
+        this.name = zoneName;
         this.car = car;
-        isParked = false;
+        this.enterTime = enterTime;
+        this.leaveTime = null;
     }
 
     public String getName() {

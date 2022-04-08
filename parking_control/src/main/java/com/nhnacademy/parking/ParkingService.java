@@ -9,21 +9,22 @@ public class ParkingService {
         this.parkingLot = parkingLot;
     }
 
-    public int scan(Car car) {
-        return car.getNum();
+    public void enter(String zoneName, Car car, ParkTime parkTime) {
+        ParkingZone zone = new ParkingZone(zoneName, car, parkTime);
+        parkingLot.inputCar(zone);
     }
 
-    public void enter(String name, Car car) {
-        parkingLot.inputCar(name, car);
+    public void leave(String zoneName) {
+        Car car = parkingLot.outCar(zoneName);
+        int fee = 1000;
+
+        if (car.getMoney() <= 0)
+            throw new NoMoneyException("no money " + car.getMoney());
+        else
+            car.payMoney(fee);
     }
 
-    public int leave(Car car) {
-        if (car.getMoney() == 0)
-            throw new NoMoneyException("no money" + car.getMoney());
-        parkingLot.outCar(car);
-
-        int fee = 100;
-
-        return fee;
+    private Car getCarInZone(String zoneName) {
+        return parkingLot.findCarByZoneName(zoneName);
     }
 }
