@@ -97,5 +97,5 @@ class ParkingLotTest {
         assertThat(parkingService.calculateFee(parkingService.getTotalSec(leaveTime4))).isEqualTo(10000);
     }
 
-    //    @DisplayName("0시 입차, 1시 40분 1초 출차, 요금 계산 및 지불")
+    //    @DisplayName("1시간 40분 1초 요금 계산 및 지불")
 }

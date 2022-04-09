@@ -1,8 +1,8 @@
 package com.nhnacademy.parking;
 
-import static com.nhnacademy.parking.Constants.ONE_DAY_TO_SEC;
-import static com.nhnacademy.parking.Constants.ONE_HOUR_TO_SEC;
-import static com.nhnacademy.parking.Constants.ONE_MIN_TO_SEC;
+import static com.nhnacademy.parking.Constants.DAY_TO_SEC;
+import static com.nhnacademy.parking.Constants.HOUR_TO_SEC;
+import static com.nhnacademy.parking.Constants.MIN_TO_SEC;
 
 import com.nhnacademy.parking.exceptions.NoMoneyException;
 
@@ -38,9 +38,9 @@ public class ParkingService {
         int totalSec = 0;
 
         totalSec += leaveTime.getSec();
-        totalSec += leaveTime.getMin() * ONE_MIN_TO_SEC;
-        totalSec += leaveTime.getHour() * ONE_HOUR_TO_SEC;
-        totalSec += leaveTime.getDay() * ONE_DAY_TO_SEC;
+        totalSec += leaveTime.getMin() * MIN_TO_SEC;
+        totalSec += leaveTime.getHour() * HOUR_TO_SEC;
+        totalSec += leaveTime.getDay() * DAY_TO_SEC;
 
         return totalSec;
     }
