@@ -13,7 +13,7 @@ public class ParkingLot {
         lot.put(zone.getName(), zone);
     }
 
-    public Car outCar(String zoneName) {
+    public Car outputCar(String zoneName) {
         Car car = findCarByZoneName(zoneName);
         lot.remove(zoneName);
         return car;
@@ -27,4 +27,11 @@ public class ParkingLot {
         return null;
     }
 
+    public ParkingZone findZoneByName(String zoneName) {
+        for (String name : lot.keySet()) {
+            if (name.equals(zoneName))
+                return lot.get(name);
+        }
+        return null;
+    }
 }

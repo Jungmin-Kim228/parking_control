@@ -18,7 +18,7 @@ public class Car {
         return this.money;
     }
 
-    public void payMoney(int money) { // 지불 후 마이너스면 예외처리 가능
+    public void payMoney(int money) { // 지불 후 마이너스면 지불불가 예외처리 가능
         this.money -= money;
     }
 }
