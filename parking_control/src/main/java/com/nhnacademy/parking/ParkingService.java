@@ -12,7 +12,7 @@ import static com.nhnacademy.parking.Constants.MIN_TO_SEC;
 
 import com.nhnacademy.parking.exceptions.NoMoneyException;
 
-public class ParkingService {
+public class ParkingService{
     private final ParkingLot parkingLot;
 
     public ParkingService(ParkingLot parkingLot) {
@@ -33,10 +33,6 @@ public class ParkingService {
         else
             car.payMoney(fee);
         return fee;
-    }
-
-    private ParkingZone getZoneByName(String zoneName) {
-        return parkingLot.findZoneByName(zoneName);
     }
 
     public int getTotalSec(ParkTime leaveTime) {

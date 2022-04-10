@@ -1,5 +1,5 @@
 package com.nhnacademy.parking;
 
-public interface CarNumberScanner {
+public interface CarScanner {
     String scan(Car car);
 }

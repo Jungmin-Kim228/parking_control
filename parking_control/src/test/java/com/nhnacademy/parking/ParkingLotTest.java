@@ -12,11 +12,11 @@ import org.junit.jupiter.api.Test;
 class ParkingLotTest {
     private ParkingLot parkingLot;
     private ParkingService parkingService;
-    private CarNumberScanner carNumberScanner;
+    private CarScanner carScanner;
 
     @BeforeEach
     void setUp() {
-        carNumberScanner = mock(CarNumberScanner.class);
+        carScanner = mock(CarScanner.class);
         parkingLot = new ParkingLot();
         parkingService = new ParkingService(parkingLot);
     }
@@ -27,8 +27,8 @@ class ParkingLotTest {
         String number = "1234";
         Car car = new Car(number, 0);
 
-        when(carNumberScanner.scan(car)).thenReturn(car.getNum());
-        String result = carNumberScanner.scan(car);
+        when(carScanner.scan(car)).thenReturn(car.getNum());
+        String result = carScanner.scan(car);
 
         assertThat(result).isEqualTo(number);
     }
