@@ -90,12 +90,14 @@ class ParkingLotTest {
         ParkTime leaveTime2 = new ParkTime(0,0,50,0);
         ParkTime leaveTime3 = new ParkTime(0,1,1,0);
         ParkTime leaveTime4 = new ParkTime(0,6,0,0);
+        ParkTime leaveTime5 = new ParkTime(1,2,0,0);
+        ParkTime leaveTime6 = new ParkTime(2,0,1,0);
 
         assertThat(parkingService.calculateFee(parkingService.getTotalSec(leaveTime1))).isEqualTo(1500);
         assertThat(parkingService.calculateFee(parkingService.getTotalSec(leaveTime2))).isEqualTo(2000);
         assertThat(parkingService.calculateFee(parkingService.getTotalSec(leaveTime3))).isEqualTo(3000);
         assertThat(parkingService.calculateFee(parkingService.getTotalSec(leaveTime4))).isEqualTo(10000);
+        assertThat(parkingService.calculateFee(parkingService.getTotalSec(leaveTime5))).isEqualTo(15500);
+        assertThat(parkingService.calculateFee(parkingService.getTotalSec(leaveTime6))).isEqualTo(21000);
     }
-
-    //    @DisplayName("1시간 40분 1초 요금 계산 및 지불")
 }
