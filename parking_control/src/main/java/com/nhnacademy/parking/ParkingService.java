@@ -1,5 +1,7 @@
 package com.nhnacademy.parking;
 
+import static com.nhnacademy.parking.CarType.COMPACT;
+import static com.nhnacademy.parking.CarType.LARGE;
 import static com.nhnacademy.parking.Constants.DAY_TO_SEC;
 import static com.nhnacademy.parking.Constants.FEE_10MIN;
 import static com.nhnacademy.parking.Constants.FEE_1DAY;
@@ -11,6 +13,7 @@ import static com.nhnacademy.parking.Constants.MIN30_TO_SEC;
 import static com.nhnacademy.parking.Constants.MIN_TO_SEC;
 
 import com.nhnacademy.parking.exceptions.NoMoneyException;
+import com.nhnacademy.parking.exceptions.NotAllowedLargeCarException;
 
 public class ParkingService{
     private final ParkingLot parkingLot;
@@ -20,6 +23,8 @@ public class ParkingService{
     }
 
     public void enter(String zoneName, Car car) {
+        if (car.getCarType() == LARGE)
+            throw new NotAllowedLargeCarException("no large" + car.getCarType());
         ParkingZone zone = new ParkingZone(zoneName, car);
         parkingLot.inputCar(zone);
     }
@@ -28,6 +33,8 @@ public class ParkingService{
         Car car = parkingLot.outputCar(zoneName);
         int fee = calculateFee(getTotalSec(leaveTime));
 
+        if (car.getCarType() == COMPACT)
+            fee /= 2;
         if (car.getMoney() < fee)
             throw new NoMoneyException("no money " + car.getMoney());
         else

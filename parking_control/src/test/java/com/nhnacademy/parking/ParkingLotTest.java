@@ -1,5 +1,7 @@
 package com.nhnacademy.parking;
 
+import static com.nhnacademy.parking.CarType.COMPACT;
+import static com.nhnacademy.parking.CarType.LARGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.mockito.Mockito.mock;
@@ -113,5 +115,28 @@ class ParkingLotTest {
         assertThatIllegalArgumentException()
             .isThrownBy(() -> parkingService.leave(zoneName, leaveTime))
             .withMessageContainingAll("no money", Integer.toString(car.getMoney()));
+    }
+
+    @DisplayName("경차 1시간 주차, 요금 50% 할인")
+    @Test
+    void compactCar_parked1Hour_discount50Percent() {
+        Car car = new Car("1234", 10000, COMPACT);
+        String zoneName = "A-1";
+        ParkTime leaveTime = new ParkTime(0,1,0,0);
+
+        parkingService.enter(zoneName, car);
+
+        assertThat(car.getMoney() - parkingService.leave(zoneName,leaveTime)).isEqualTo(8750);
+    }
+
+    @DisplayName("대형차 입차 불가")
+    @Test
+    void notAllowedLargeCarException() {
+        Car car = new Car("1234", 10000, LARGE);
+        String zoneName = "A-1";
+
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> parkingService.enter(zoneName, car))
+            .withMessageContainingAll("no large", car.getCarType().toString());
     }
 }
