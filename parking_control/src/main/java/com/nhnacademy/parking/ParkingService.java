@@ -2,15 +2,7 @@ package com.nhnacademy.parking;
 
 import static com.nhnacademy.parking.CarType.COMPACT;
 import static com.nhnacademy.parking.CarType.LARGE;
-import static com.nhnacademy.parking.Constants.DAY_TO_SEC;
-import static com.nhnacademy.parking.Constants.FEE_10MIN;
-import static com.nhnacademy.parking.Constants.FEE_1DAY;
-import static com.nhnacademy.parking.Constants.FEE_FIRST_30MIN;
-import static com.nhnacademy.parking.Constants.HOUR_TO_SEC;
-import static com.nhnacademy.parking.Constants.MAX_DAY_FEE_SEC;
-import static com.nhnacademy.parking.Constants.MIN10_TO_SEC;
-import static com.nhnacademy.parking.Constants.MIN30_TO_SEC;
-import static com.nhnacademy.parking.Constants.MIN_TO_SEC;
+import static com.nhnacademy.parking.Constants.*;
 
 import com.nhnacademy.parking.exceptions.NoMoneyException;
 import com.nhnacademy.parking.exceptions.NotAllowedLargeCarException;

@@ -39,8 +39,7 @@ class ParkingLotTest {
     @Test
     void enter_and_leaveCar() {
         String zoneName = "A-1";
-        ParkTime parkTime = new ParkTime(0,0,0,0);
-        Car car = new Car("1234", 0);
+        Car car = new Car("1234", 1000);
 
         parkingService.enter(zoneName, car);
         assertThat(parkingLot.getTotalCar()).isEqualTo(1);
