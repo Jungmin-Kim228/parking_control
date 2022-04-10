@@ -26,10 +26,9 @@ public class ParkingService {
 
     public int leave(String zoneName, ParkTime leaveTime) {
         Car car = parkingLot.outputCar(zoneName);
-
         int fee = calculateFee(getTotalSec(leaveTime));
 
-        if (car.getMoney() <= 0)
+        if (car.getMoney() < fee)
             throw new NoMoneyException("no money " + car.getMoney());
         else
             car.payMoney(fee);
@@ -53,32 +52,25 @@ public class ParkingService {
 
     public int calculateFee(int totalSec) {
         int fee = 0;
-        System.out.println("1 totalSec: " + totalSec + " fee: " + fee);
         while (totalSec >= DAY_TO_SEC) {
             fee += FEE_1DAY;
             totalSec -= DAY_TO_SEC;
-            System.out.println("2 totalSec: " + totalSec + " fee: " + fee);
         }
         if (totalSec >= MAX_DAY_FEE_SEC) {
-            System.out.println("3 totalSec: " + totalSec + " fee: " + fee);
             return fee + FEE_1DAY;
         }
         if (totalSec <= MIN30_TO_SEC) {
-            System.out.println("4 totalSec: " + totalSec + " fee: " + fee);
             return fee + FEE_FIRST_30MIN;
         }
         else {
             fee += FEE_FIRST_30MIN;
             totalSec -= MIN30_TO_SEC;
-            System.out.println("5 totalSec: " + totalSec + " fee: " + fee);
             while (totalSec >= MIN10_TO_SEC) {
                 fee += FEE_10MIN;
                 totalSec -= MIN10_TO_SEC;
-                System.out.println("6 totalSec: " + totalSec + " fee: " + fee);
             }
             if (totalSec > 0) {
                 fee += FEE_10MIN;
-                System.out.println("7 totalSec: " + totalSec + " fee: " + fee);
             }
             return fee;
         }

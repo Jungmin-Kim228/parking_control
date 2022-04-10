@@ -100,4 +100,18 @@ class ParkingLotTest {
         assertThat(parkingService.calculateFee(parkingService.getTotalSec(leaveTime5))).isEqualTo(15500);
         assertThat(parkingService.calculateFee(parkingService.getTotalSec(leaveTime6))).isEqualTo(21000);
     }
+
+    @DisplayName("30분 주차 요금 1000원이 없어 출차 불가")
+    @Test
+    void parked30minute_noMoney_throwNoMoneyException() {
+        Car car = new Car("1234", 500);
+        String zoneName = "A-1";
+        ParkTime leaveTime = new ParkTime(0,0,20,0);
+
+        parkingService.enter(zoneName, car);
+
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> parkingService.leave(zoneName, leaveTime))
+            .withMessageContainingAll("no money", Integer.toString(car.getMoney()));
+    }
 }
